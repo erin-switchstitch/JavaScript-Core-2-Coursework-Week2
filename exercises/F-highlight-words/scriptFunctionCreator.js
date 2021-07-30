@@ -15,17 +15,15 @@ function wrapMultipleElements(el, wrapper, value) {
 
 
 
-function highlightWords(paragraph, colours) {
-  const targetElement = document.getElementById('content');
-  let paragraphSplit = paragraph.split(" ")
-  
-  
+function highlightWords(paragraph, colours, containerElement, optionArray) {
+  const targetElement = document.getElementById(containerElement);
+ 
 
-  for (let index = 0; index < paragraphSplit.length; index++) {
-    const element = paragraphSplit[index];
+  for (let index = 0; index < optionArray.length; index++) {
+    const element = optionArray[index];
     
     const createElem = document.createElement("span");
-    createElem.className += "newElemClass";
+    createElem.className += "newSpanClass";
     createElem.value = createElem.textContent; 
     createElem.textContent = `${element} `;
     targetElement.appendChild(createElem);

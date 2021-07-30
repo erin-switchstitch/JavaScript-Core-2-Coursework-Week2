@@ -1,17 +1,15 @@
-function wrapMultipleElements(el, wrapper, value) {
-  // e.g. wrapMutipleElements('select', '.optionClass');
-  // This will wrap all the elements with a class of "optionClass"
-  // with the select element 
-  var newElem = document.createElement(`${el}`)
-  //newElem.
-  
-  Array.prototype.forEach.call(document.querySelectorAll(`${wrapper}`), function(c){
-    /*newElem.value = value;*/
-    newElem.appendChild(c);
-  });
+	function wrapMultipleElements(el, wrapper) {
+    // e.g. wrapMutipleElements('select', '.optionClass');
+    // This will wrap all the elements with a class of "optionClass"
+    // with the select element 
+    var newElem = document.createElement(`${el}`)
+    
+    Array.prototype.forEach.call(document.querySelectorAll(`${wrapper}`), function(c){
+      newElem.appendChild(c);
+    });
 
-  document.body.appendChild(newElem);
-}
+    document.body.appendChild(newElem);
+  }
 
 
 
@@ -23,39 +21,50 @@ function highlightWords(paragraph, colours) {
 
   for (let index = 0; index < paragraphSplit.length; index++) {
     const element = paragraphSplit[index];
+    targetElement.innerHTML += `<span class=spanClass>${element} </span>`;
     
-    const createElem = document.createElement("span");
-    createElem.className += "newElemClass";
-    createElem.value = createElem.textContent; 
-    createElem.textContent = `${element} `;
-    targetElement.appendChild(createElem);
+    const spanElement = document.getElementsByClassName("spanClass");
 
+    spanElement[index].addEventListener("click",function(){
+     console.log("clicked");
+     console.log(spanElement[index])
+    });
+
+    spanElement[index].style.color = "red";
+    // const spanElement = document.getElementsByTagName("span")[index];
+    // console.log(typeof(spanElement));
+    // spanElement.addEventListener("click",()=>{
+    //   console.log("clicked");
+    //});
+
+    //const spanElement = document.querySelectorAll(".spanClass");
+    //console.log(typeof(spanElement[index]))
+    //console.log(Array.from(spanElement));
+    
+    //console.log(spanElement[index]);
+   
+
+
+    const testElement = document.querySelector("#test");
+    console.log(typeof(testElement))
+    //console.log(console.log(testElement)[index]);
+
+    testElement.addEventListener("click",()=>{
+     console.log("clicked");
+     console.log(testElement)
+    });
+ 
   }
+
 
   
   for (let index = 0; index < colours.length; index++) {
     //console.log(colours[index]);
-    targetElement.innerHTML += `<option value='${colours[index]}' class='optionClass'>${colours[index]}</option>`;
-    //targetElement.value = createElem.textContent;
+    targetElement.innerHTML += `<option value='optionNum${index}' class='optionClass' alt='${colours[index]}'>${colours[index]}</option>`;
+  
   };
 
-  const spanElement = document.getElementsByClassName("newElemClass");
   wrapMultipleElements('select', '.optionClass');
-
-  
-    
-    const selectValue = document.getElementsByTagName("select");
-    
-
-    for (let index = 0; index < spanElement.length; index++) {
-      const element = spanElement[index];
-      element.addEventListener("click",function(){
-        console.log("clicked");
-        console.log(selectValue[0].value);
-        element.style.backgroundColor = selectValue[0].value;
-      });
-    }
-    
  
 }
 
